@@ -1,0 +1,21 @@
+.navbar-component {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .nav-img {
+    .nav-img-item {
+      width: 7vh;
+      margin-left: 5rem;
+    }
+  }
+  .nav-links {
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+    margin: auto 1rem;
+    .nav-link-item {
+      font-size: 2rem;
+      font-weight: 300;
+    }
+  }
+}
