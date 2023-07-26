@@ -17,7 +17,7 @@ function Navbar() {
         <Link className="nav-link-item" to="/shop">
           Shop
         </Link>
-        <Link className="nav-link-item" to="/signin">
+        <Link className="nav-link-item" to="/auth">
           Sign In
         </Link>
       </div>

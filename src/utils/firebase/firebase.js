@@ -2,8 +2,9 @@ import { initializeApp } from "firebase/app";
 import {
   GoogleAuthProvider,
   signInWithPopup,
-  signInWithRedirect,
   getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 
@@ -20,7 +21,7 @@ const firebaseConfig = {
 
   appId: "1:816503196387:web:1245754cf4869842a893d6",
 };
-
+// eslint-disable-next-line
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
@@ -29,8 +30,16 @@ provider.setCustomParameters({
 
 export const auth = getAuth();
 export const popup = () => signInWithPopup(auth, provider);
+export const emailPassword = async (email, password) => {
+  if (!email || !password) return;
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
+export const loginWithEmailPassword = async (email, password) => {
+  if (!email || !password) return;
+  return await signInWithEmailAndPassword(auth, email, password);
+};
 export const db = getFirestore();
-export const createUserDoc = async (userAuth) => {
+export const createUserDoc = async (userAuth, additional) => {
   const userDocRef = doc(db, "user", userAuth.uid);
   const userSnap = await getDoc(userDocRef);
   if (!userSnap.exists()) {
@@ -41,6 +50,7 @@ export const createUserDoc = async (userAuth) => {
         displayName,
         email,
         date,
+        ...additional,
       });
     } catch (error) {
       console.log(error);
