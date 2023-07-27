@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import FormInput from "../inputField/inputField.component";
 import SignInBtn from "../signInBtn/signinBtn.component";
 import { loginWithEmailPassword } from "../../utils/firebase/firebase";
+
 function LoginForm() {
   const defaultForm = {
     email: "",
     password: "",
   };
+
   const [forminputs, setForminputs] = useState(defaultForm);
   const handleChange = (event) => {
     const { name, value } = event.target;

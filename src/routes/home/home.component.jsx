@@ -1,9 +1,10 @@
 import CategoriesItem from "../../components/categoriesItem/categoriesItem.component";
+import { ProductContext } from "../../contexts/products.context";
 import "./home.styles.scss";
-import data from "../../assets/db.json";
+import { useContext } from "react";
 
 function Home() {
-  const categories = Object.values(data.categories);
+  const { categories } = useContext(ProductContext);
 
   return (
     <div className="categories-container">

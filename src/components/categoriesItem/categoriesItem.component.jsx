@@ -10,6 +10,7 @@ const CategoriesItem = (props) => {
     if (product.category === category) {
       img = product.thumbnail;
     }
+    return 0;
   });
   return (
     <div className="category-item">

@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  position: relative;
   .nav-img {
     .nav-img-item {
       width: 7vh;
@@ -17,5 +18,8 @@
       font-size: 2rem;
       font-weight: 300;
     }
+  }
+  .cartdd-container {
+    position: absolute;
   }
 }

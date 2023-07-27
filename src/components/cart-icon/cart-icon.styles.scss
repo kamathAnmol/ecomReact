@@ -1,0 +1,14 @@
+.cart-container {
+  position: relative;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  .cart-svg {
+    width: 35px;
+    height: 35px;
+  }
+  .cart-quantity {
+    position: absolute;
+    top: -7%;
+    left: 22%;
+  }
+}

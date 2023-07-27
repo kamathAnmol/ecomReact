@@ -1,11 +1,12 @@
-import React from "react";
 import { popup, createUserDoc } from "../../utils/firebase/firebase";
 import SignUpForm from "../../components/signupForm/signupForm.component";
 import LoginForm from "../../components/loginForm/login.component";
 import "./authPage.styles.scss";
+
 function AuthPage() {
   const googleLogin = async () => {
     const { user } = await popup();
+    alert("logged in");
     await createUserDoc(user);
   };
 

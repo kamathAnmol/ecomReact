@@ -4,6 +4,7 @@ import { emailPassword, createUserDoc } from "../../utils/firebase/firebase";
 import FormInput from "../inputField/inputField.component";
 import "../signupForm/signupform.styles.scss";
 import SignInBtn from "../signInBtn/signinBtn.component";
+
 const formFields = {
   displayName: "",
   email: "",
@@ -28,6 +29,7 @@ function SignUpForm() {
       const { user } = await emailPassword(email, password);
       await createUserDoc(user, { displayName });
       alert("registered Successfully please login");
+      // setCurrentUser(user);
       setFormInput(formFields);
     } catch (error) {
       alert(error.code);
