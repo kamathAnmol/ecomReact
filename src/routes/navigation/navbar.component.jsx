@@ -13,7 +13,6 @@ function Navbar() {
   const [showDD, setShowDD] = useState(false);
   const showDropDown = () => {
     setShowDD(!showDD);
-    console.log("clicked");
   };
   return (
     <div className="navbar-component">

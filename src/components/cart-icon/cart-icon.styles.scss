@@ -1,14 +1,18 @@
 .cart-container {
   position: relative;
-  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+  width: 35px;
+  height: 35px;
   .cart-svg {
     width: 35px;
     height: 35px;
+    position: absolute;
   }
   .cart-quantity {
-    position: absolute;
-    top: -7%;
-    left: 22%;
+    margin: unset;
+    margin-top: 5px;
   }
 }
