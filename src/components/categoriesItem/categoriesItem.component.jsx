@@ -1,6 +1,12 @@
-// import React, { useEffect, useState } from "react";
-import "./categoriesItem.styles.scss";
 import data from "../../assets/db.json";
+import { ChevronRight } from "lucide-react";
+import {
+  CategoryBtn,
+  CategoryContent,
+  CategoryItemContainer,
+  CategoryItemImg,
+  CategoryName,
+} from "./categoriesItem.styles";
 
 const CategoriesItem = (props) => {
   const category = props.category;
@@ -13,13 +19,15 @@ const CategoriesItem = (props) => {
     return 0;
   });
   return (
-    <div className="category-item">
-      <img src={img} alt="" className="category-img" />
-      <div className="category-content">
-        <p className="category-name">{category}</p>
-        <button className="category-btn">Buy Now ➡️</button>
-      </div>
-    </div>
+    <CategoryItemContainer>
+      <CategoryItemImg src={img} alt="" />
+      <CategoryContent>
+        <CategoryName>{category}</CategoryName>
+        <CategoryBtn>
+          Buy Now <ChevronRight size={20} />
+        </CategoryBtn>
+      </CategoryContent>
+    </CategoryItemContainer>
   );
 };
 

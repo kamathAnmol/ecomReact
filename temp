@@ -1,0 +1,29 @@
+[33mcommit 689b3019b447220a65ebbaa5efc0b3d433470ecc[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: anmolkamat <anmolrk096322@gmail.com>
+Date:   Mon Jul 31 15:02:55 2023 +0530
+
+    added cart features and Checkout page
+
+[33mcommit d3c6458e8a50ce590a86edfd0bf8efc0208b63e8[m
+Author: anmolkamat <anmolrk096322@gmail.com>
+Date:   Thu Jul 27 14:42:02 2023 +0530
+
+    shop page
+
+[33mcommit 7ab81742e55a166e1e283db7fe0758ebc6540471[m
+Author: anmolkamat <anmolrk096322@gmail.com>
+Date:   Wed Jul 26 14:59:17 2023 +0530
+
+    finished Auth Page
+
+[33mcommit 8cf687eed207a5859b5f5a0cdc1e9c16f918394b[m
+Author: anmolkamat <anmolrk096322@gmail.com>
+Date:   Tue Jul 25 16:20:51 2023 +0530
+
+    added authentication
+
+[33mcommit 25ca4b75c73deea29aae6d91a83927242580d50c[m
+Author: anmolkamat <anmolrk096322@gmail.com>
+Date:   Mon Jul 24 09:43:06 2023 +0530
+
+    Initialize project using Create React App

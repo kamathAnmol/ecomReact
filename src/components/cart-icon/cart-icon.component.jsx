@@ -1,14 +1,17 @@
-import { ReactComponent as CartSvg } from "../../assets/shopping-bag.svg";
-import "./cart-icon.styles.scss";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
+import {
+  CartContainer,
+  CartQuantity,
+  CartSvgContainer,
+} from "./cart-icon.styles";
 function CartIcon(props) {
   const { count } = useContext(CartContext);
   return (
-    <div className="cart-container" {...props}>
-      <CartSvg className="cart-svg"></CartSvg>
-      <p className="cart-quantity">{count}</p>
-    </div>
+    <CartContainer {...props}>
+      <CartSvgContainer className="cart-svg" />
+      <CartQuantity className="cart-quantity">{count}</CartQuantity>
+    </CartContainer>
   );
 }
 

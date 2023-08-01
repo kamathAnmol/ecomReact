@@ -1,4 +1,18 @@
-.button {
+import styled from "styled-components";
+
+export const AuthPageContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5rem;
+  margin: 5rem auto;
+  width: max-content;
+`;
+
+export const GoogleLoginContainer = styled.div`
+  align-self: center;
+`;
+
+export const GoogleLoginBtn = styled.button`
   max-width: 320px;
   display: flex;
   padding: 0.5rem 1.4rem;
@@ -17,26 +31,10 @@
   cursor: pointer;
   transition: all 0.6s ease;
   max-height: 50px;
-}
-
-.button svg {
-  height: 24px;
-}
-
-button:hover {
-  transform: scale(1.02);
-}
-
-.sign-in-page {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 5rem;
-  margin: 5rem auto;
-  width: max-content;
-  .login-container {
-    align-self: flex-end;
+  & svg {
+    height: 24px;
   }
-  .google-login {
-    align-self: center;
+  &:hover {
+    transform: scale(1.02);
   }
-}
+`;

@@ -1,7 +1,11 @@
 import { popup, createUserDoc } from "../../utils/firebase/firebase";
 import SignUpForm from "../../components/signupForm/signupForm.component";
 import LoginForm from "../../components/loginForm/login.component";
-import "./authPage.styles.scss";
+import {
+  AuthPageContainer,
+  GoogleLoginBtn,
+  GoogleLoginContainer,
+} from "./authPage.styles";
 
 function AuthPage() {
   const googleLogin = async () => {
@@ -11,12 +15,12 @@ function AuthPage() {
   };
 
   return (
-    <div className="sign-in-page">
+    <AuthPageContainer>
       <SignUpForm></SignUpForm>
       <LoginForm></LoginForm>
-      <div className="google-login">
-        <h1>Or ➡️</h1>
-        <button className="button" onClick={googleLogin}>
+      <GoogleLoginContainer>
+        <h1>Or</h1>
+        <GoogleLoginBtn onClick={googleLogin}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             preserveAspectRatio="xMidYMid"
@@ -40,9 +44,9 @@ function AuthPage() {
             ></path>
           </svg>
           Continue with Google
-        </button>
-      </div>
-    </div>
+        </GoogleLoginBtn>
+      </GoogleLoginContainer>
+    </AuthPageContainer>
   );
 }
 

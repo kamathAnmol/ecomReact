@@ -8,8 +8,17 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
-
+import {
+  doc,
+  getDoc,
+  setDoc,
+  getFirestore,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+} from "firebase/firestore";
+import data from "../../assets/db.json";
 const firebaseConfig = {
   apiKey: "AIzaSyCp3thBwYQtdIWIMYSoRbZ45FUVl6FYUUI",
 
@@ -63,3 +72,31 @@ export const createUserDoc = async (userAuth, additional) => {
 };
 export const signOutUser = async () => await signOut(auth);
 export const authState = (callback) => onAuthStateChanged(auth, callback);
+
+export const addToDb = async () => {
+  const collectionRef = collection(db, "products");
+  const batch = writeBatch(db);
+  data.products.forEach((product) => {
+    const docRef = doc(collectionRef, `${product.id}_${product.category}`);
+    batch.set(docRef, product);
+  });
+  await batch.commit();
+  console.log("added to db");
+};
+
+export const getProducts = async () => {
+  const collectionRef = collection(db, "products");
+  const q = query(collectionRef);
+  const querySnap = await getDocs(q);
+  const productsArray = [];
+  querySnap.forEach((doc) => {
+    if (doc.exists()) {
+      // The `doc.data()` method returns the document data as an object.
+      const productData = doc.data();
+      // Assuming each product document has a unique identifier, you can also include it in the object.
+      const productObject = { id: doc.id, ...productData };
+      productsArray.push(productObject);
+    }
+  });
+  return productsArray;
+};

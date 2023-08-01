@@ -1,11 +1,11 @@
 import React from "react";
-import "./signinBtn.styles.scss";
+import { SigninBtnStyles } from "./signinBtn.styles";
 function SignInBtn({ label, ...otherProps }) {
   return (
     <div>
-      <button type="submit" className="signin-btn" {...otherProps}>
+      <SigninBtnStyles type="submit" {...otherProps}>
         {label}
-      </button>
+      </SigninBtnStyles>
     </div>
   );
 }

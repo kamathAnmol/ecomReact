@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
-import logo from "../../logo.svg";
-import "./navbar.styles.scss";
+import { Outlet } from "react-router-dom";
+// import "./navbar.styles.scss";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/users.context";
 import SignInBtn from "../../components/signInBtn/signinBtn.component";
 import { signOutUser } from "../../utils/firebase/firebase";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cartDropdown/cartdd.component";
+import { NavLinks, NavLogo, NavbarContainer, NavLink } from "./navbar.styles";
+import { Atom } from "lucide-react";
+
 function Navbar() {
   const { currentUser } = useContext(UserContext);
   const [showDD, setShowDD] = useState(false);
@@ -15,31 +17,26 @@ function Navbar() {
     setShowDD(!showDD);
   };
   return (
-    <div className="navbar-component">
-      <Link to="/" className="nav-img">
-        {" "}
-        <img alt="" src={logo} className="nav-img-item" />
-      </Link>
-      <div className="nav-links">
-        <Link className="nav-link-item" to="/">
-          Home
-        </Link>
-        <Link className="nav-link-item" to="/shop">
-          Shop
-        </Link>
+    <NavbarContainer>
+      <NavLogo to="/">
+        <Atom size={48} />
+      </NavLogo>
+      <NavLinks>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/shop">Shop</NavLink>
         <CartIcon onClick={showDropDown}></CartIcon>
 
-        <Link className="nav-link-item" to="/auth">
+        <NavLink to="/auth">
           {currentUser ? (
             <SignInBtn label="Sign Out" onClick={signOutUser}></SignInBtn>
           ) : (
             <SignInBtn label="Sign In"></SignInBtn>
           )}
-        </Link>
-      </div>
-      {showDD && <CartDropdown className="cartdd-container"></CartDropdown>}
+        </NavLink>
+      </NavLinks>
+      {showDD && <CartDropdown></CartDropdown>}
       <Outlet />
-    </div>
+    </NavbarContainer>
   );
 }
 

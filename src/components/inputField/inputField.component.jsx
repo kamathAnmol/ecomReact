@@ -8,10 +8,6 @@ function FormInput({ label, ...otherProps }) {
         {label}
       </label>
     </div>
-    // <div className="input-container">
-    //   <label>{label}</label>
-    //   <input {...otherProps} />
-    // </div>
   );
 }
 

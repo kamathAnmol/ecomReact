@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FormInput from "../inputField/inputField.component";
-import SignInBtn from "../signInBtn/signinBtn.component";
 import { loginWithEmailPassword } from "../../utils/firebase/firebase";
+import { LoginBtn, LoginPageContainer } from "./loginPage.styles";
 
 function LoginForm() {
   const defaultForm = {
@@ -26,8 +26,8 @@ function LoginForm() {
     }
   };
   return (
-    <div className="login-container">
-      <h1 className="login-head">Login ➡️</h1>
+    <LoginPageContainer>
+      <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <FormInput
           label="Email"
@@ -43,9 +43,9 @@ function LoginForm() {
           onChange={handleChange}
           value={password}
         ></FormInput>
-        <SignInBtn label="Log In"></SignInBtn>
+        <LoginBtn label="Log In"></LoginBtn>
       </form>
-    </div>
+    </LoginPageContainer>
   );
 }
 

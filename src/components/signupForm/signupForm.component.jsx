@@ -2,9 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { emailPassword, createUserDoc } from "../../utils/firebase/firebase";
 import FormInput from "../inputField/inputField.component";
-import "../signupForm/signupform.styles.scss";
-import SignInBtn from "../signInBtn/signinBtn.component";
-
+import { SignUpBtn } from "./signupForm.styles";
 const formFields = {
   displayName: "",
   email: "",
@@ -36,9 +34,9 @@ function SignUpForm() {
     }
   };
   return (
-    <div className="signup-form-container">
-      <h1 className="sign-up-head">Sign Up ➡️</h1>
-      <form className="signup-form" onSubmit={submitHandler}>
+    <div>
+      <h1>Sign Up </h1>
+      <form onSubmit={submitHandler}>
         <FormInput
           required
           label="Name"
@@ -71,7 +69,7 @@ function SignUpForm() {
           onChange={changeHandler}
           value={confirmPassword}
         />
-        <SignInBtn label="Sign Up"></SignInBtn>
+        <SignUpBtn label="Sign Up"></SignUpBtn>
       </form>
     </div>
   );

@@ -1,27 +1,37 @@
 import React from "react";
-import "./checkoutpage.styles.scss";
 import { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ChevronRight, ChevronLeft, Trash2, CreditCard } from "lucide-react";
+import {
+  CheckoutContainer,
+  CheckoutHead,
+  CheckoutFooter,
+  CheckoutImg,
+  FooterBtn,
+  FooterText,
+} from "./checkoutpage.styles";
+
 function CheckOutPage() {
   const { cartItems, modifyQuantity, removeCartItem, totalPrice } =
     useContext(CartContext);
   return (
-    <div className="checkout-container">
-      <div className="checkout-head">
+    <CheckoutContainer>
+      <CheckoutHead>
         <h1>Checkout</h1>
         <p>
           Total : <b> ${totalPrice}</b>
         </p>
-      </div>
-      <table className="table">
+      </CheckoutHead>
+      <table className="table" style={{ marginBottom: "10rem" }}>
         <thead>
           <tr>
             <th scope="col" style={{ width: "30%" }}>
               Product
             </th>
-            <th scope="col">Name</th>
+            <th scope="col" style={{ width: "40%" }}>
+              Name
+            </th>
             <th scope="col">Quantity</th>
             <th scope="col">Price</th>
             <th scope="col">Remove</th>
@@ -32,17 +42,13 @@ function CheckOutPage() {
             return (
               <tr key={item.id}>
                 <th scope="row">
-                  <img
-                    src={item.thumbnail}
-                    alt=""
-                    className="img-thumbnail img-fluid checkout-img"
-                  />
+                  <CheckoutImg src={item.thumbnail} alt="" />
                 </th>
                 <td>
                   <b>{item.title}</b>
                 </td>
                 <td>
-                  <div className="quantity-container">
+                  <div>
                     <ChevronLeft
                       color="#000000"
                       strokeWidth={1}
@@ -58,7 +64,6 @@ function CheckOutPage() {
                       strokeWidth={1}
                       onClick={() => {
                         modifyQuantity(item, "add");
-                        // addToCart(item);
                       }}
                     />
                   </div>
@@ -77,17 +82,17 @@ function CheckOutPage() {
         </tbody>
       </table>
       {cartItems.length > 0 && (
-        <div className="checkout-footer">
-          <p>
+        <CheckoutFooter>
+          <FooterText>
             Total : <b>${totalPrice}</b>
-          </p>
-          <button>
+          </FooterText>
+          <FooterBtn>
             Checkout
             <CreditCard size={48} strokeWidth={1} />
-          </button>
-        </div>
+          </FooterBtn>
+        </CheckoutFooter>
       )}
-    </div>
+    </CheckoutContainer>
   );
 }
 
