@@ -15,7 +15,7 @@ function Category() {
   useEffect(() => {
     setCategoryName(category);
     setProductList(categoryProducts);
-  }, [category, categoryProducts]);
+  }, [category, categoryProducts, setCategoryName]);
   console.log(categoryProducts);
   return (
     <CategoryContainer>
