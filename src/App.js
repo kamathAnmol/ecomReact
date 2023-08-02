@@ -4,6 +4,7 @@ import Navbar from "./routes/navigation/navbar.component.jsx";
 import AuthPage from "./routes/authentication/authPage.component.jsx";
 import ShopPage from "./routes/shop/shop.component.jsx";
 import CheckOutPage from "./routes/checkout/checkoutpage.component.jsx";
+import Category from "./routes/category/category.component.jsx";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="auth" element={<AuthPage />}></Route>
         <Route path="shop" element={<ShopPage />}></Route>
         <Route path="checkout" element={<CheckOutPage />}></Route>
+        <Route path="category/:category" element={<Category />}></Route>
       </Routes>
       <Navbar />
     </div>

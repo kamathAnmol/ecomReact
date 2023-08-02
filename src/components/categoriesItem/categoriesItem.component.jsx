@@ -7,6 +7,7 @@ import {
   CategoryItemImg,
   CategoryName,
 } from "./categoriesItem.styles";
+import { Link } from "react-router-dom";
 
 const CategoriesItem = (props) => {
   const category = props.category;
@@ -23,9 +24,11 @@ const CategoriesItem = (props) => {
       <CategoryItemImg src={img} alt="" />
       <CategoryContent>
         <CategoryName>{category}</CategoryName>
-        <CategoryBtn>
-          Buy Now <ChevronRight size={20} />
-        </CategoryBtn>
+        <Link to={`category/${category}`}>
+          <CategoryBtn>
+            Buy Now <ChevronRight size={20} />
+          </CategoryBtn>
+        </Link>
       </CategoryContent>
     </CategoryItemContainer>
   );
