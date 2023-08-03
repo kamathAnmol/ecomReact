@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useReducer } from "react";
+import { CreateAction } from "../utils/reducers/reducer.util";
 
 export const CartContext = createContext({
   cartItems: [],
@@ -8,38 +9,64 @@ export const CartContext = createContext({
   modifyQuantity: () => {},
   removeCartItem: () => {},
   totalPrice: 0,
+  showDD: Boolean,
+  setShowDD: () => {},
 });
 
+const initialState = {
+  cartItems: [],
+  count: 0,
+  totalPrice: 0,
+  showDD: false,
+};
+
+const CART_REDUCER_TYPES = {
+  SET_CART_ITEMS: `SET_CART_ITEMS`,
+  SET_SHOW_DD: `SET_SHOW_DD`,
+};
+
+const cartReducer = (state, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case CART_REDUCER_TYPES.SET_CART_ITEMS:
+      return {
+        ...state,
+        ...payload,
+      };
+    case CART_REDUCER_TYPES.SET_SHOW_DD:
+      return {
+        ...state,
+        showDD: payload,
+      };
+
+    default:
+      throw new Error("inavlid handler in cart Reducer");
+  }
+};
+
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
-  const [count, setCount] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
-  useEffect(() => {
-    const updateCount = () => {
-      const newCount = cartItems.reduce(
-        (total, item) => total + item.quantity,
-        0
-      );
-      setCount(newCount);
-    };
-    const updateTotal = () => {
-      const totalamt = cartItems.reduce(
-        (total, item) => total + item.price * item.quantity,
-        0
-      );
-      setTotalPrice(totalamt);
-    };
-    // const updateCart = () => {
-    //   cartItems.map((item) => {
-    //     if (item.quantity === 0) {
-    //       removeCartItem(item);
-    //     }
-    //   });
-    // };
-    updateTotal();
-    // updateCart();
-    updateCount();
-  }, [cartItems]);
+  const [{ cartItems, totalPrice, count, showDD }, dispatch] = useReducer(
+    cartReducer,
+    initialState
+  );
+
+  const updateCart = (newCartItems) => {
+    const newCount = newCartItems.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+    const totalamt = newCartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+    dispatch(
+      CreateAction(CART_REDUCER_TYPES.SET_CART_ITEMS, {
+        cartItems: newCartItems,
+        count: newCount,
+        totalPrice: totalamt,
+      })
+    );
+  };
 
   const addToCart = (product) => {
     let cartItemsList = [...cartItems];
@@ -56,10 +83,9 @@ export const CartProvider = ({ children }) => {
         quantity: 1,
       });
     }
-    return setCartItems(cartItemsList);
+    return updateCart(cartItemsList);
   };
   const modifyQuantity = (product, func) => {
-    // Create a new array using map to avoid modifying the original array.
     const updatedCartItems = cartItems.map((item) => {
       if (item.id === product.id) {
         if (func === "add") {
@@ -71,23 +97,25 @@ export const CartProvider = ({ children }) => {
       }
       return item;
     });
-
-    setCartItems(updatedCartItems);
+    updateCart(updatedCartItems);
   };
 
   const removeCartItem = (product) => {
-    // Create a new array using filter to avoid modifying the original array.
     const updatedCartItems = cartItems.filter((item) => item.id !== product.id);
-    setCartItems(updatedCartItems);
+    updateCart(updatedCartItems);
+  };
+  const setShowDD = (value) => {
+    dispatch(CreateAction(CART_REDUCER_TYPES.SET_SHOW_DD, value));
   };
   const value = {
     cartItems,
-    setCartItems,
     addToCart,
     count,
     modifyQuantity,
     removeCartItem,
     totalPrice,
+    showDD,
+    setShowDD,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

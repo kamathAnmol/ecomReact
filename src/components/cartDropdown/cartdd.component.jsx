@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../contexts/cart.context";
 import CartItem from "../cart-item/cartItem.component";
 import {
@@ -11,9 +11,16 @@ import {
 } from "./cartdd.styles";
 
 function CartDropdown() {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, setShowDD } = useContext(CartContext);
+  const [isMouseEnter, setIsMouseEnter] = useState(false);
+
   return (
-    <CartContainer>
+    <CartContainer
+      onMouseEnter={() => setIsMouseEnter(true)}
+      onMouseLeave={() => {
+        if (isMouseEnter) setShowDD(false);
+      }}
+    >
       <CartItemContainer>
         {cartItems.length > 0 ? (
           cartItems.map((cartItem) => {

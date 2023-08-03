@@ -1,6 +1,4 @@
-import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-// import "./navbar.styles.scss";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/users.context";
 import SignInBtn from "../../components/signInBtn/signinBtn.component";
@@ -9,10 +7,11 @@ import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cartDropdown/cartdd.component";
 import { NavLinks, NavLogo, NavbarContainer, NavLink } from "./navbar.styles";
 import { Atom } from "lucide-react";
+import { CartContext } from "../../contexts/cart.context";
 
 function Navbar() {
   const { currentUser } = useContext(UserContext);
-  const [showDD, setShowDD] = useState(false);
+  const { showDD, setShowDD } = useContext(CartContext);
   const showDropDown = () => {
     setShowDD(!showDD);
   };

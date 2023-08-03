@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { devices } from "../../assets/constants";
 
 export const SigninBtnStyles = styled.button`
   margin: 0 auto;
@@ -10,7 +11,7 @@ export const SigninBtnStyles = styled.button`
   background: #e8e8e8;
   position: relative;
   font-weight: 1000;
-  font-size: 17px;
+  font-size: 1vw;
   -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
   box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
   transition: all 250ms;
@@ -34,5 +35,11 @@ export const SigninBtnStyles = styled.button`
   }
   &:hover::before {
     width: 100%;
+  }
+  ${devices.mobile} {
+    font-size: 3vw;
+  }
+  ${devices.tab} {
+    font-size: 2vw;
   }
 `;

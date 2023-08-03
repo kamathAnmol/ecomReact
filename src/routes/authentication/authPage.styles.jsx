@@ -16,7 +16,7 @@ export const GoogleLoginBtn = styled.button`
   max-width: 320px;
   display: flex;
   padding: 0.5rem 1.4rem;
-  font-size: 0.875rem;
+  font-size: 0.875vw;
   line-height: 1.25rem;
   font-weight: 700;
   text-align: center;

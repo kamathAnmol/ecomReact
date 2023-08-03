@@ -25,7 +25,7 @@ export const ShopItemBtn = styled.button`
   background-color: black;
   color: white;
   height: 5vh;
-  font-size: 1.3rem;
+  font-size: 1.3vw;
   font-weight: 300;
   bottom: 10px;
   left: 10%;
@@ -53,6 +53,6 @@ export const ShopItemContainer = styled.div`
 export const ShopItemContent = styled.span`
   display: flex;
   justify-content: space-between;
-  font-size: 1.3rem;
+  font-size: 1.3vw;
   font-weight: 300;
 `;

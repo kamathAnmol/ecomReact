@@ -7,7 +7,7 @@ export const CategoryContainer = styled.div`
 
 export const CategoryHead = styled.h1`
   margin: unset;
-  font-size: 3rem;
+  font-size: 3vw;
   font-weight: 300;
 `;
 

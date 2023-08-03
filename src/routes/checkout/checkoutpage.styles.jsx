@@ -35,7 +35,7 @@ export const CheckoutFooter = styled.div`
 `;
 
 export const FooterText = styled.p`
-  font-size: 2.5rem;
+  font-size: 2.5vw;
   font-weight: 300;
   margin: unset;
 `;
@@ -52,7 +52,7 @@ export const FooterBtn = styled.button`
   padding: 1rem;
   display: flex;
   justify-content: space-between;
-  font-size: 2rem;
+  font-size: 2vw;
   font-weight: 300;
   border-radius: 8px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
@@ -61,6 +61,6 @@ export const FooterBtn = styled.button`
   transition: font-size 0.3s;
   width: 20%;
   &:hover {
-    font-size: 2.5rem;
+    font-size: 2.5vw;
   }
 `;

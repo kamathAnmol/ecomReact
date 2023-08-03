@@ -22,7 +22,7 @@ export const Wrapper = styled.div`
 `;
 
 export const CartItemName = styled.p`
-  font-size: 1rem;
+  font-size: 1vw;
   width: 100%;
   font-weight: 500;
 `;

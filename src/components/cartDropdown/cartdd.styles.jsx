@@ -16,7 +16,7 @@ export const CheckoutBtn = styled.button`
   background-color: black;
   color: white;
   height: 5vh;
-  font-size: 1.3rem;
+  font-size: 1.3vw;
   font-weight: 300;
   transition: 0.3s;
   &:hover {
@@ -50,6 +50,6 @@ export const CartItemContainer = styled.div`
 
 export const EmptyCartString = styled.p`
   text-align: center;
-  font-size: 2rem;
+  font-size: 2vw;
   font-weight: 300;
 `;
