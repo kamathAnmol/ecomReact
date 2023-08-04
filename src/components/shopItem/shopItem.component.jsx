@@ -12,7 +12,7 @@ function ShopItem({ product }) {
   const { addToCart } = useContext(CartContext);
 
   return (
-    <ShopItemContainer>
+    <ShopItemContainer key={product.id}>
       <ShopImgContainer>
         <ShopItemImg src={product.thumbnail} alt="" />
         <ShopItemBtn onClick={() => addToCart(product)}>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { devices } from "../../assets/constants";
 
 export const CheckoutBtnContainer = styled(Link)`
   align-self: center;
@@ -25,6 +26,12 @@ export const CheckoutBtn = styled.button`
     border-color: black;
     outline-offset: 0;
   }
+  ${devices.mobile} {
+    font-size: 5vw;
+  }
+  ${devices.tab} {
+    font-size: 3vw;
+  }
 `;
 
 export const CartContainer = styled.div`
@@ -43,7 +50,7 @@ export const CartContainer = styled.div`
 
 export const CartItemContainer = styled.div`
   height: 40vh;
-  overflow: scroll;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
 `;

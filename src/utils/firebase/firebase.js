@@ -53,7 +53,6 @@ export const db = getFirestore();
 export const createUserDoc = async (userAuth, additional) => {
   const userDocRef = doc(db, "user", userAuth.uid);
   const userSnap = await getDoc(userDocRef);
-  console.log(userSnap);
   if (!userSnap.exists()) {
     const { displayName, email } = userAuth;
     const date = new Date();

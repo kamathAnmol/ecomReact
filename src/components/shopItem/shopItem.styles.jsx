@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { devices } from "../../assets/constants";
 
 export const ShopImgContainer = styled.div`
   position: relative;
@@ -34,6 +35,14 @@ export const ShopItemBtn = styled.button`
     color: black;
     border-color: black;
   }
+  ${devices.mobile} {
+    display: block;
+    font-size: 3vw;
+  }
+  ${devices.tab} {
+    display: block;
+    font-size: 2vw;
+  }
 `;
 
 export const ShopItemContainer = styled.div`
@@ -48,6 +57,12 @@ export const ShopItemContainer = styled.div`
   &:hover ${ShopItemBtn} {
     display: block;
   }
+  ${devices.mobile} {
+    border-color: black;
+  }
+  ${devices.tab} {
+    border-color: black;
+  }
 `;
 
 export const ShopItemContent = styled.span`
@@ -55,4 +70,19 @@ export const ShopItemContent = styled.span`
   justify-content: space-between;
   font-size: 1.3vw;
   font-weight: 300;
+  margin: 1rem 0.5rem 0 0.5rem;
+  p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  ${devices.mobile} {
+    font-size: 3vw;
+  }
+  ${devices.tab} {
+    font-size: 2vw;
+  }
 `;

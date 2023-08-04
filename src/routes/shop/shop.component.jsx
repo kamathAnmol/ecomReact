@@ -8,7 +8,7 @@ function ShopPage() {
   return (
     <ShopContainer>
       {products.map((product) => {
-        return <ShopItem product={product} key={product.key}></ShopItem>;
+        return <ShopItem product={product} key={product.id}></ShopItem>;
       })}
     </ShopContainer>
   );

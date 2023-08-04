@@ -10,6 +10,7 @@ import {
   CheckoutImg,
   FooterBtn,
   FooterText,
+  TableRow,
 } from "./checkoutpage.styles";
 
 function CheckOutPage() {
@@ -40,7 +41,7 @@ function CheckOutPage() {
         <tbody>
           {cartItems.map((item) => {
             return (
-              <tr key={item.id}>
+              <TableRow key={item.id}>
                 <th scope="row">
                   <CheckoutImg src={item.thumbnail} alt="" />
                 </th>
@@ -76,7 +77,7 @@ function CheckOutPage() {
                     }}
                   />
                 </td>
-              </tr>
+              </TableRow>
             );
           })}
         </tbody>

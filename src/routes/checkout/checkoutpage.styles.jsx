@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { devices } from "../../assets/constants";
 
 export const CheckoutContainer = styled.div`
   width: 80%;
@@ -14,9 +15,16 @@ export const CheckoutHead = styled.div`
 `;
 
 export const CheckoutImg = styled.img`
-  height: 30vh;
+  max-height: 30vh;
   min-width: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  max-width: 30%;
+  ${devices.mobile} {
+    max-height: 10vh;
+  }
+  ${devices.tab} {
+    max-height: 20vh;
+  }
 `;
 
 export const CheckoutFooter = styled.div`
@@ -32,12 +40,26 @@ export const CheckoutFooter = styled.div`
   margin: auto;
   padding: 1rem 10rem;
   left: 0;
+  ${devices.mobile} {
+    padding: 1rem;
+    height: 10vh;
+  }
+  ${devices.tab} {
+    padding: 1rem;
+    height: 12vh;
+  }
 `;
 
 export const FooterText = styled.p`
   font-size: 2.5vw;
   font-weight: 300;
   margin: unset;
+  ${devices.mobile} {
+    font-size: 3.5vw;
+  }
+  ${devices.tab} {
+    font-size: 3vw;
+  }
 `;
 
 export const FooterBtn = styled.button`
@@ -59,8 +81,35 @@ export const FooterBtn = styled.button`
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
   align-items: center;
   transition: font-size 0.3s;
-  width: 20%;
+  width: 30vw;
+  max-width: 300px;
   &:hover {
     font-size: 2.5vw;
+  }
+  ${devices.mobile} {
+    height: 7vh;
+    font-size: 3.5vw;
+    width: 40%;
+    &:hover {
+      font-size: 3.8vw;
+    }
+  }
+  ${devices.tab} {
+    height: 7vh;
+    font-size: 3.5vw;
+    width: 40%;
+    &:hover {
+      font-size: 3.8vw;
+    }
+  }
+`;
+
+export const TableRow = styled.tr`
+  height: 32vh;
+  ${devices.mobile} {
+    height: 12vh;
+  }
+  ${devices.tab} {
+    height: 22vh;
   }
 `;
