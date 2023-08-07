@@ -1,10 +1,10 @@
 import React from "react";
-import { useContext } from "react";
 import ShopItem from "../../components/shopItem/shopItem.component";
-import { ProductContext } from "../../contexts/products.context";
 import { ShopContainer } from "./shop.styles";
+import { useSelector } from "react-redux";
+import { selectProducts } from "../../store/products/products.selector";
 function ShopPage() {
-  const { products } = useContext(ProductContext);
+  const products = useSelector(selectProducts);
   return (
     <ShopContainer>
       {products.map((product) => {

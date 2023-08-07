@@ -5,8 +5,26 @@ import AuthPage from "./routes/authentication/authPage.component.jsx";
 import ShopPage from "./routes/shop/shop.component.jsx";
 import CheckOutPage from "./routes/checkout/checkoutpage.component.jsx";
 import Category from "./routes/category/category.component.jsx";
-
+import { useEffect } from "react";
+import {
+  authState,
+  createUserDoc,
+  signOutUser,
+} from "./utils/firebase/firebase.js";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "./store/user/user.action";
 function App() {
+  const disptach = useDispatch();
+  useEffect(() => {
+    signOutUser();
+    const unsub = authState((user) => {
+      if (user) {
+        createUserDoc(user);
+      }
+      disptach(setCurrentUser(user));
+    });
+    return unsub;
+  }, [disptach]);
   return (
     <div className="App">
       <div style={{ height: "10vh" }}></div>

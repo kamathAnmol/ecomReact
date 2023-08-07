@@ -1,22 +1,24 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ProductContext } from "../../contexts/products.context";
 import ShopItem from "../../components/shopItem/shopItem.component";
 import {
   CategoryContainer,
   CategoryHead,
   CategoryList,
 } from "./category.styles";
+import { useSelector } from "react-redux";
+import { selectProducts } from "../../store/products/products.selector";
 
 function Category() {
   const category = useParams().category;
-  const { setCategoryName, categoryProducts } = useContext(ProductContext);
+  const products = useSelector(selectProducts);
   const [productList, setProductList] = useState([]);
   useEffect(() => {
-    setCategoryName(category);
-    setProductList(categoryProducts);
-  }, [category, categoryProducts, setCategoryName]);
-  console.log(categoryProducts);
+    const filteredProducts = products.filter(
+      (item) => item.category === category.toLocaleLowerCase()
+    );
+    setProductList(filteredProducts);
+  }, [category, products]);
   return (
     <CategoryContainer>
       <CategoryHead>{category}</CategoryHead>

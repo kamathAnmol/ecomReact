@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../../contexts/users.context";
 import SignInBtn from "../../components/signInBtn/signinBtn.component";
 import { signOutUser } from "../../utils/firebase/firebase";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
@@ -8,9 +7,11 @@ import CartDropdown from "../../components/cartDropdown/cartdd.component";
 import { NavLinks, NavLogo, NavbarContainer, NavLink } from "./navbar.styles";
 import { Atom } from "lucide-react";
 import { CartContext } from "../../contexts/cart.context";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user.selector";
 
 function Navbar() {
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector(selectCurrentUser);
   const { showDD, setShowDD } = useContext(CartContext);
   const showDropDown = () => {
     setShowDD(!showDD);
