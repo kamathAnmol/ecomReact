@@ -1,12 +1,12 @@
-import { useContext } from "react";
-import { CartContext } from "../../contexts/cart.context";
 import {
   CartContainer,
   CartQuantity,
   CartSvgContainer,
 } from "./cart-icon.styles";
+import { useSelector } from "react-redux";
+import { selectCart } from "../../store/cart/cart.selector";
 function CartIcon(props) {
-  const { count } = useContext(CartContext);
+  const { count } = useSelector(selectCart);
   return (
     <CartContainer {...props}>
       <CartSvgContainer className="cart-svg" />

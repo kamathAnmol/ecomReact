@@ -10,21 +10,38 @@ import {
   authState,
   createUserDoc,
   signOutUser,
+  getProducts,
 } from "./utils/firebase/firebase.js";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "./store/user/user.action";
+import {
+  setProducts,
+  setCategories,
+} from "./store/products/products.action.js";
 function App() {
-  const disptach = useDispatch();
+  const dispatch = useDispatch();
   useEffect(() => {
     signOutUser();
     const unsub = authState((user) => {
       if (user) {
         createUserDoc(user);
       }
-      disptach(setCurrentUser(user));
+      dispatch(setCurrentUser(user));
     });
+    const getProductData = async () => {
+      const newProducts = await getProducts();
+      dispatch(setProducts(newProducts));
+      const catList = [];
+      newProducts.map((product) => {
+        catList.push(product.category);
+        return 0;
+      });
+      const catSet = new Set(catList);
+      dispatch(setCategories([...catSet]));
+    };
+    getProductData();
     return unsub;
-  }, [disptach]);
+  }, [dispatch]);
   return (
     <div className="App">
       <div style={{ height: "10vh" }}></div>

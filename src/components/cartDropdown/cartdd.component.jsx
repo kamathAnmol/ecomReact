@@ -1,6 +1,5 @@
 import React from "react";
-import { useContext, useState } from "react";
-import { CartContext } from "../../contexts/cart.context";
+import { useState } from "react";
 import CartItem from "../cart-item/cartItem.component";
 import {
   CheckoutBtnContainer,
@@ -9,16 +8,20 @@ import {
   CartItemContainer,
   EmptyCartString,
 } from "./cartdd.styles";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCart } from "../../store/cart/cart.selector";
+import { setDropDown } from "../../store/cart/cart.action";
 
 function CartDropdown() {
-  const { cartItems, setShowDD } = useContext(CartContext);
+  // const { cartItems, setShowDD } = useContext(CartContext);
   const [isMouseEnter, setIsMouseEnter] = useState(false);
-
+  const { cartItems } = useSelector(selectCart);
+  const dispatch = useDispatch();
   return (
     <CartContainer
       onMouseEnter={() => setIsMouseEnter(true)}
       onMouseLeave={() => {
-        if (isMouseEnter) setShowDD(false);
+        if (isMouseEnter) dispatch(setDropDown(false));
       }}
     >
       <CartItemContainer>

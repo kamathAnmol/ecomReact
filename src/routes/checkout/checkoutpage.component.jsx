@@ -1,6 +1,4 @@
 import React from "react";
-import { useContext } from "react";
-import { CartContext } from "../../contexts/cart.context";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ChevronRight, ChevronLeft, Trash2, CreditCard } from "lucide-react";
 import {
@@ -12,16 +10,37 @@ import {
   FooterText,
   TableRow,
 } from "./checkoutpage.styles";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCart } from "../../store/cart/cart.selector";
+import { setCartItems } from "../../store/cart/cart.action";
 
 function CheckOutPage() {
-  const { cartItems, modifyQuantity, removeCartItem, totalPrice } =
-    useContext(CartContext);
+  const dispatch = useDispatch();
+  const { cartItems, total } = useSelector(selectCart);
+  const removeCartItem = (product) => {
+    const updatedCartItems = cartItems.filter((item) => item.id !== product.id);
+    dispatch(setCartItems(updatedCartItems));
+  };
+  const modifyQuantity = (product, func) => {
+    const updatedCartItems = cartItems.map((item) => {
+      if (item.id === product.id) {
+        if (func === "add") {
+          item.quantity += 1;
+        }
+        if (func === "remove") {
+          item.quantity -= 1;
+        }
+      }
+      return item;
+    });
+    dispatch(setCartItems(updatedCartItems));
+  };
   return (
     <CheckoutContainer>
       <CheckoutHead>
         <h1>Checkout</h1>
         <p>
-          Total : <b> ${totalPrice}</b>
+          Total : <b> ${total}</b>
         </p>
       </CheckoutHead>
       <table className="table" style={{ marginBottom: "10rem" }}>
@@ -85,7 +104,7 @@ function CheckOutPage() {
       {cartItems.length > 0 && (
         <CheckoutFooter>
           <FooterText>
-            Total : <b>${totalPrice}</b>
+            Total : <b>${total}</b>
           </FooterText>
           <FooterBtn>
             Checkout

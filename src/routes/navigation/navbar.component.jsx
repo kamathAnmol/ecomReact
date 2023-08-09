@@ -1,21 +1,37 @@
 import { Outlet } from "react-router-dom";
-import { useContext } from "react";
 import SignInBtn from "../../components/signInBtn/signinBtn.component";
 import { signOutUser } from "../../utils/firebase/firebase";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cartDropdown/cartdd.component";
 import { NavLinks, NavLogo, NavbarContainer, NavLink } from "./navbar.styles";
 import { Atom } from "lucide-react";
-import { CartContext } from "../../contexts/cart.context";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
+import { useEffect } from "react";
+import { selectCart } from "../../store/cart/cart.selector";
+import { setDropDown, updateCountTotal } from "../../store/cart/cart.action";
 
 function Navbar() {
+  const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
-  const { showDD, setShowDD } = useContext(CartContext);
+  const { cartItems, dropDown } = useSelector(selectCart);
+
   const showDropDown = () => {
-    setShowDD(!showDD);
+    dispatch(setDropDown(!dropDown));
   };
+  useEffect(() => {
+    const newCartItems = cartItems.filter((item) => item.quantity !== 0);
+    const newCount = newCartItems.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+    const totalamt = newCartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+    dispatch(updateCountTotal(newCount, totalamt));
+  }, [cartItems, dispatch]);
+
   return (
     <NavbarContainer>
       <NavLogo to="/">
@@ -34,7 +50,7 @@ function Navbar() {
           )}
         </NavLink>
       </NavLinks>
-      {showDD && <CartDropdown></CartDropdown>}
+      {dropDown && <CartDropdown></CartDropdown>}
       <Outlet />
     </NavbarContainer>
   );
