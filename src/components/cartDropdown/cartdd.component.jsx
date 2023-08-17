@@ -10,7 +10,7 @@ import {
 } from "./cartdd.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../../store/cart/cart.selector";
-import { setDropDown } from "../../store/cart/cart.action";
+import { setDropDown } from "../../store/cart/cart.reducer";
 
 function CartDropdown() {
   // const { cartItems, setShowDD } = useContext(CartContext);

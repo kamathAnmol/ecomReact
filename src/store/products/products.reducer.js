@@ -1,27 +1,19 @@
-import { productReducerTypes } from "./products.types";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const PRODUCTS_INITIAL_STATE = {
   products: [],
   categories: [],
 };
 
-export const productsReducer = (
-  state = PRODUCTS_INITIAL_STATE,
-  action = {}
-) => {
-  const { type, payload } = action;
-  switch (type) {
-    case productReducerTypes.SET_PRODUCTS:
-      return {
-        ...state,
-        products: payload,
-      };
-    case productReducerTypes.SET_CATEGORIES:
-      return {
-        ...state,
-        categories: payload,
-      };
-    default:
-      return state;
-  }
-};
+export const productsSlice = createSlice({
+  name: "product",
+  initialState: PRODUCTS_INITIAL_STATE,
+  reducers: {
+    setProducts(state, action) {
+      state.products = action.payload;
+    },
+  },
+});
+
+export const productsReducer = productsSlice.reducer;
+export const { setProducts } = productsSlice.actions;

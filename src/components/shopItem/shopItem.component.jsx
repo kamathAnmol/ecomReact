@@ -7,28 +7,28 @@ import {
 } from "./shopItem.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../../store/cart/cart.selector";
-import { setCartItems } from "../../store/cart/cart.action";
+import { setCartItems } from "../../store/cart/cart.reducer";
 
 function ShopItem({ product }) {
   const dispatch = useDispatch();
   const { cartItems } = useSelector(selectCart);
 
   const addToCart = (product) => {
-    let cartItemsList = [...cartItems];
-    if (cartItemsList.find((cartItem) => cartItem.id === product.id)) {
-      cartItemsList.map((cartItem) => {
-        if (cartItem.id === product.id) {
-          cartItem.quantity += 1;
-        }
-        return 0;
-      });
+    const existingCartItem = cartItems.find(
+      (cartItem) => cartItem.id === product.id
+    );
+
+    if (existingCartItem) {
+      const updatedCartItems = cartItems.map((cartItem) =>
+        cartItem.id === product.id
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
+      );
+      dispatch(setCartItems(updatedCartItems));
     } else {
-      cartItemsList.push({
-        ...product,
-        quantity: 1,
-      });
+      const newCartItem = { ...product, quantity: 1 };
+      dispatch(setCartItems([...cartItems, newCartItem]));
     }
-    dispatch(setCartItems(cartItemsList));
   };
 
   return (

@@ -2,9 +2,16 @@ import CategoriesItem from "../../components/categoriesItem/categoriesItem.compo
 import { CategoryContainer } from "./home.styles";
 
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { selectCategories } from "../../store/products/products.selector";
+import { selectProducts } from "../../store/products/products.selector";
 function Home() {
-  const categories = useSelector(selectCategories);
+  const products = useSelector(selectProducts);
+  const catList = [];
+  products.map((product) => {
+    catList.push(product.category);
+    return 0;
+  });
+  const catSet = new Set(catList);
+  const categories = [...catSet];
   return (
     <CategoryContainer>
       {categories.map((category, index) => {

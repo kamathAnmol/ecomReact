@@ -12,11 +12,12 @@ import {
 } from "./checkoutpage.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../../store/cart/cart.selector";
-import { setCartItems } from "../../store/cart/cart.action";
+import { setCartItems } from "../../store/cart/cart.reducer";
 
 function CheckOutPage() {
   const dispatch = useDispatch();
   const { cartItems, total } = useSelector(selectCart);
+
   const removeCartItem = (product) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== product.id);
     dispatch(setCartItems(updatedCartItems));
@@ -24,12 +25,14 @@ function CheckOutPage() {
   const modifyQuantity = (product, func) => {
     const updatedCartItems = cartItems.map((item) => {
       if (item.id === product.id) {
+        const newItem = { ...item };
         if (func === "add") {
-          item.quantity += 1;
+          newItem.quantity += 1;
         }
         if (func === "remove") {
-          item.quantity -= 1;
+          newItem.quantity -= 1;
         }
+        return newItem;
       }
       return item;
     });

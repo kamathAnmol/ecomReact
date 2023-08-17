@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { useEffect } from "react";
 import { selectCart } from "../../store/cart/cart.selector";
-import { setDropDown, updateCountTotal } from "../../store/cart/cart.action";
+import { setDropDown, updateCountTotal } from "../../store/cart/cart.reducer";
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -21,15 +21,16 @@ function Navbar() {
   };
   useEffect(() => {
     const newCartItems = cartItems.filter((item) => item.quantity !== 0);
-    const newCount = newCartItems.reduce(
+    const count = newCartItems.reduce(
       (total, item) => total + item.quantity,
       0
     );
-    const totalamt = newCartItems.reduce(
+    const total = newCartItems.reduce(
       (total, item) => total + item.price * item.quantity,
       0
     );
-    dispatch(updateCountTotal(newCount, totalamt));
+
+    dispatch(updateCountTotal({ count, total }));
   }, [cartItems, dispatch]);
 
   return (

@@ -13,11 +13,8 @@ import {
   getProducts,
 } from "./utils/firebase/firebase.js";
 import { useDispatch } from "react-redux";
-import { setCurrentUser } from "./store/user/user.action";
-import {
-  setProducts,
-  setCategories,
-} from "./store/products/products.action.js";
+import { setCurrentUser } from "./store/user/user.reducer.js";
+import { setProducts } from "./store/products/products.reducer.js";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -31,13 +28,6 @@ function App() {
     const getProductData = async () => {
       const newProducts = await getProducts();
       dispatch(setProducts(newProducts));
-      const catList = [];
-      newProducts.map((product) => {
-        catList.push(product.category);
-        return 0;
-      });
-      const catSet = new Set(catList);
-      dispatch(setCategories([...catSet]));
     };
     getProductData();
     return unsub;
