@@ -1,17 +1,11 @@
 import { CreateAction } from "../../utils/reducers/reducer.util";
 import { productReducerTypes } from "./products.types";
 
-export const setProducts = (products) => {
-  return CreateAction(productReducerTypes.SET_PRODUCTS, products);
-};
+export const fetchProductStart = () =>
+  CreateAction(productReducerTypes.FETCH_PRODUCTS_START);
 
-export const setCategories = (categories) => {
-  return CreateAction(productReducerTypes.SET_CATEGORIES, categories);
-};
+export const fetchProductSuccess = (products) =>
+  CreateAction(productReducerTypes.FETCH_PRODUCTS_SUCCESS, products);
 
-export const setCategoryProducts = (categoryProducts) => {
-  return CreateAction(
-    productReducerTypes.SET_CATEGORY_PRODUCTS,
-    categoryProducts
-  );
-};
+export const fetchProductFailed = (error) =>
+  CreateAction(productReducerTypes.FETCH_PRODUCTS_FAILED, error);

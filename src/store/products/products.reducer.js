@@ -2,7 +2,8 @@ import { productReducerTypes } from "./products.types";
 
 export const PRODUCTS_INITIAL_STATE = {
   products: [],
-  categories: [],
+  isLoading: false,
+  error: null,
 };
 
 export const productsReducer = (
@@ -11,15 +12,19 @@ export const productsReducer = (
 ) => {
   const { type, payload } = action;
   switch (type) {
-    case productReducerTypes.SET_PRODUCTS:
+    case productReducerTypes.FETCH_PRODUCTS_START:
+      return { ...state, isLoading: true };
+    case productReducerTypes.FETCH_PRODUCTS_SUCCESS:
       return {
         ...state,
         products: payload,
+        isLoading: false,
       };
-    case productReducerTypes.SET_CATEGORIES:
+    case productReducerTypes.FETCH_PRODUCTS_FAILED:
       return {
         ...state,
-        categories: payload,
+        isLoading: false,
+        error: payload,
       };
     default:
       return state;

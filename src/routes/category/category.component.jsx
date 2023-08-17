@@ -7,11 +7,16 @@ import {
   CategoryList,
 } from "./category.styles";
 import { useSelector } from "react-redux";
-import { selectProducts } from "../../store/products/products.selector";
+import {
+  selectProducts,
+  selectIsLoading,
+} from "../../store/products/products.selector";
+import { MoonLoader } from "react-spinners";
 
 function Category() {
   const category = useParams().category;
   const products = useSelector(selectProducts);
+  const isLoading = useSelector(selectIsLoading);
   const [productList, setProductList] = useState([]);
   useEffect(() => {
     const filteredProducts = products.filter(
@@ -22,11 +27,15 @@ function Category() {
   return (
     <CategoryContainer>
       <CategoryHead>{category}</CategoryHead>
-      <CategoryList>
-        {productList.map((product) => {
-          return <ShopItem product={product} key={product.id}></ShopItem>;
-        })}
-      </CategoryList>
+      {isLoading ? (
+        <MoonLoader></MoonLoader>
+      ) : (
+        <CategoryList>
+          {productList.map((product) => {
+            return <ShopItem product={product} key={product.id}></ShopItem>;
+          })}
+        </CategoryList>
+      )}
     </CategoryContainer>
   );
 }

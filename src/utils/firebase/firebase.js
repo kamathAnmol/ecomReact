@@ -67,7 +67,7 @@ export const createUserDoc = async (userAuth, additional) => {
       console.log(error);
     }
   }
-  return userDocRef;
+  return userSnap;
 };
 export const signOutUser = async () => await signOut(auth);
 export const authState = (callback) => onAuthStateChanged(auth, callback);
@@ -90,12 +90,23 @@ export const getProducts = async () => {
   const productsArray = [];
   querySnap.forEach((doc) => {
     if (doc.exists()) {
-      // The `doc.data()` method returns the document data as an object.
       const productData = doc.data();
-      // Assuming each product document has a unique identifier, you can also include it in the object.
       const productObject = { id: doc.id, ...productData };
       productsArray.push(productObject);
     }
   });
   return productsArray;
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
 };

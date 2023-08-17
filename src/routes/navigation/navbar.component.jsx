@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import SignInBtn from "../../components/signInBtn/signinBtn.component";
-import { signOutUser } from "../../utils/firebase/firebase";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cartDropdown/cartdd.component";
 import { NavLinks, NavLogo, NavbarContainer, NavLink } from "./navbar.styles";
@@ -10,6 +9,7 @@ import { selectCurrentUser } from "../../store/user/user.selector";
 import { useEffect } from "react";
 import { selectCart } from "../../store/cart/cart.selector";
 import { setDropDown, updateCountTotal } from "../../store/cart/cart.action";
+import { signOutStart } from "../../store/user/user.action";
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -31,7 +31,9 @@ function Navbar() {
     );
     dispatch(updateCountTotal(newCount, totalamt));
   }, [cartItems, dispatch]);
-
+  const signOutUser = () => {
+    dispatch(signOutStart());
+  };
   return (
     <NavbarContainer>
       <NavLogo to="/">

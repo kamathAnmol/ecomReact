@@ -6,42 +6,16 @@ import ShopPage from "./routes/shop/shop.component.jsx";
 import CheckOutPage from "./routes/checkout/checkoutpage.component.jsx";
 import Category from "./routes/category/category.component.jsx";
 import { useEffect } from "react";
-import {
-  authState,
-  createUserDoc,
-  signOutUser,
-  getProducts,
-} from "./utils/firebase/firebase.js";
 import { useDispatch } from "react-redux";
-import { setCurrentUser } from "./store/user/user.action";
-import {
-  setProducts,
-  setCategories,
-} from "./store/products/products.action.js";
+import { fetchProductStart } from "./store/products/products.action.js";
+import { checkUserSession } from "./store/user/user.action.js";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    signOutUser();
-    const unsub = authState((user) => {
-      if (user) {
-        createUserDoc(user);
-      }
-      dispatch(setCurrentUser(user));
-    });
-    const getProductData = async () => {
-      const newProducts = await getProducts();
-      dispatch(setProducts(newProducts));
-      const catList = [];
-      newProducts.map((product) => {
-        catList.push(product.category);
-        return 0;
-      });
-      const catSet = new Set(catList);
-      dispatch(setCategories([...catSet]));
-    };
-    getProductData();
-    return unsub;
+    dispatch(checkUserSession());
+    dispatch(fetchProductStart());
   }, [dispatch]);
+
   return (
     <div className="App">
       <div style={{ height: "10vh" }}></div>

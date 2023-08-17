@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import FormInput from "../inputField/inputField.component";
-import { loginWithEmailPassword } from "../../utils/firebase/firebase";
 import { LoginBtn, LoginPageContainer } from "./loginPage.styles";
+import { useDispatch } from "react-redux";
+import { emailSigninStart } from "../../store/user/user.action";
 
 function LoginForm() {
   const defaultForm = {
     email: "",
     password: "",
   };
+  const dispatch = useDispatch();
 
   const [forminputs, setForminputs] = useState(defaultForm);
   const handleChange = (event) => {
@@ -18,7 +20,7 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await loginWithEmailPassword(email, password);
+      dispatch(emailSigninStart(email, password));
       setForminputs(defaultForm);
       alert("logged in");
     } catch (error) {

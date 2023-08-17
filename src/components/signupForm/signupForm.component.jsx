@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import { emailPassword, createUserDoc } from "../../utils/firebase/firebase";
 import FormInput from "../inputField/inputField.component";
 import { SignUpBtn } from "./signupForm.styles";
+import { useDispatch } from "react-redux";
+import { signupStart } from "../../store/user/user.action";
 const formFields = {
   displayName: "",
   email: "",
@@ -10,6 +11,7 @@ const formFields = {
   confirmPassword: "",
 };
 function SignUpForm() {
+  const dispatch = useDispatch();
   const [formInput, setFormInput] = useState({ formFields });
   const { displayName, email, password, confirmPassword } = formInput;
   const changeHandler = (event) => {
@@ -24,10 +26,7 @@ function SignUpForm() {
       alert("passwords Dont Match");
     }
     try {
-      const { user } = await emailPassword(email, password);
-      await createUserDoc(user, { displayName });
-      alert("registered Successfully please login");
-      // setCurrentUser(user);
+      dispatch(signupStart(email, password, displayName));
       setFormInput(formFields);
     } catch (error) {
       alert(error.code);

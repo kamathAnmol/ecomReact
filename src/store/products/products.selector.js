@@ -1,14 +1,14 @@
 import { createSelector } from "reselect";
 
 const getProductsState = (state) => state.products.products;
-const getCategoriesState = (state) => state.products.categories;
+const getIsloadingState = (state) => state.products.isLoading;
 
 export const selectProducts = createSelector(
   [getProductsState],
   (products) => products
 );
 
-export const selectCategories = createSelector(
-  [getCategoriesState],
-  (categories) => categories
+export const selectIsLoading = createSelector(
+  [getIsloadingState],
+  (isLoading) => isLoading
 );

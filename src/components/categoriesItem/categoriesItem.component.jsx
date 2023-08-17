@@ -1,4 +1,3 @@
-import data from "../../assets/db.json";
 import { ChevronRight } from "lucide-react";
 import {
   CategoryBtn,
@@ -8,10 +7,12 @@ import {
   CategoryName,
 } from "./categoriesItem.styles";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectProducts } from "../../store/products/products.selector";
 
 const CategoriesItem = (props) => {
   const category = props.category;
-  const productList = data.products;
+  const productList = useSelector(selectProducts);
   let img = "";
   productList.map((product) => {
     if (product.category === category) {

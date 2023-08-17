@@ -1,4 +1,3 @@
-import { popup, createUserDoc } from "../../utils/firebase/firebase";
 import SignUpForm from "../../components/signupForm/signupForm.component";
 import LoginForm from "../../components/loginForm/login.component";
 import {
@@ -6,12 +5,13 @@ import {
   GoogleLoginBtn,
   GoogleLoginContainer,
 } from "./authPage.styles";
+import { useDispatch } from "react-redux";
+import { googleSigninStart } from "../../store/user/user.action";
 
 function AuthPage() {
+  const dispatch = useDispatch();
   const googleLogin = async () => {
-    const { user } = await popup();
-    alert("logged in");
-    await createUserDoc(user);
+    dispatch(googleSigninStart());
   };
 
   return (
