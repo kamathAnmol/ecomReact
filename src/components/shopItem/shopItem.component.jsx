@@ -40,9 +40,9 @@ function ShopItem({ product }) {
         </ShopItemBtn>
       </ShopImgContainer>
       <ShopItemContent>
-        <p>{product.title}</p>
-        <p>
-          <b>$</b>
+        <p style={{ overflow: "hidden", textAlign: "left" }}>{product.title}</p>
+        <p style={{ textAlign: "right" }}>
+          <b>Rs.</b>
           {product.price}
         </p>
       </ShopItemContent>

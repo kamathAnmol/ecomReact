@@ -15,7 +15,7 @@ function CartItem({ cartItem }) {
         <CartItemName>{cartItem.title}</CartItemName>
         <InnerWrapper>
           <p>
-            $<b>{cartItem.price}</b>
+            Rs.<b>{cartItem.price}</b>
           </p>
           <p>
             x<b>{cartItem.quantity}</b>

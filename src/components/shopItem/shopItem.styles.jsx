@@ -30,6 +30,7 @@ export const ShopItemBtn = styled.button`
   font-weight: 300;
   bottom: 10px;
   left: 10%;
+  transition: 0.3s;
   &:hover {
     background-color: white;
     color: black;
@@ -51,6 +52,7 @@ export const ShopItemContainer = styled.div`
   border: 2px solid rgba(0, 0, 0, 0);
   padding: 1rem;
   border-radius: 10px;
+  transition: 0.3s;
   &:hover {
     border-color: black;
   }
@@ -66,13 +68,13 @@ export const ShopItemContainer = styled.div`
 `;
 
 export const ShopItemContent = styled.span`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
   font-size: 1.3vw;
   font-weight: 300;
   margin: 1rem 0.5rem 0 0.5rem;
+  width: 100%;
   p {
-    overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2; /* number of lines to show */

@@ -9,7 +9,13 @@ import {
 } from "./payments.styles";
 import { useSelector } from "react-redux";
 import { selectCart } from "../../store/cart/cart.selector";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import {
+  CardElement,
+  Elements,
+  PaymentElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
 import { selectCurrentUser } from "../../store/user/user.selector";
 
 function PaymentsPage() {
@@ -18,6 +24,7 @@ function PaymentsPage() {
   const elements = useElements();
   const currentUser = useSelector(selectCurrentUser);
   const [isPaymentProcessing, setisPaymentProcessing] = useState(false);
+  const [options, setOptions] = useState({});
   const paymentHandler = async (e) => {
     e.preventDefault();
     if (!stripe || !elements) return;
@@ -34,6 +41,7 @@ function PaymentsPage() {
     const {
       paymentIntent: { client_secret },
     } = response;
+    setOptions({ clientSecret: `{${client_secret}}` });
     const paymentResult = await stripe.confirmCardPayment(client_secret, {
       payment_method: {
         card: elements.getElement(CardElement),
@@ -56,11 +64,12 @@ function PaymentsPage() {
     <PaymentsContainer onSubmit={paymentHandler}>
       <PaymentHead>Enter Card Deatils for payment</PaymentHead>
       <CardElement />
+
       <Wrapper>
         <PayButton disabled={isPaymentProcessing}></PayButton>
         <div>
           <TotalText>Total</TotalText>
-          <TotalP>{`$${total}`}</TotalP>
+          <TotalP>{`RS.${total}`}</TotalP>
         </div>
       </Wrapper>
     </PaymentsContainer>

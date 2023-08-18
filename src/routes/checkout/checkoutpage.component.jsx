@@ -43,7 +43,7 @@ function CheckOutPage() {
       <CheckoutHead>
         <h1>Checkout</h1>
         <p>
-          Total : <b> ${total}</b>
+          Total : <b> Rs.{total}</b>
         </p>
       </CheckoutHead>
       <table className="table" style={{ marginBottom: "10rem" }}>
@@ -91,7 +91,7 @@ function CheckOutPage() {
                     />
                   </div>
                 </td>
-                <td>${item.price}</td>
+                <td>Rs.{item.price}</td>
                 <td>
                   <Trash2
                     onClick={() => {
@@ -107,7 +107,7 @@ function CheckOutPage() {
       {cartItems.length > 0 && (
         <CheckoutFooter>
           <FooterText>
-            Total : <b>${total}</b>
+            Total : <b>Rs.{total}</b>
           </FooterText>
           <FooterBtn to="/payment">
             Checkout
