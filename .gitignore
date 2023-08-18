@@ -9,6 +9,7 @@
 
 # production
 /build
+.env
 
 # misc
 .DS_Store
@@ -23,3 +24,6 @@ yarn-error.log*
 package-lock.json
 package-lock.json
 package-lock.json
+
+# Local Netlify folder
+.netlify

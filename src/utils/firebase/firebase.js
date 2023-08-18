@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
 import {
   doc,
@@ -41,9 +42,11 @@ provider.setCustomParameters({
 
 export const auth = getAuth();
 export const popup = () => signInWithPopup(auth, provider);
-export const emailPassword = async (email, password) => {
+export const emailPassword = async (email, password, displayName) => {
   if (!email || !password) return;
-  return await createUserWithEmailAndPassword(auth, email, password);
+  const result = await createUserWithEmailAndPassword(auth, email, password);
+  await updateProfile(result.user, { displayName: displayName });
+  return result;
 };
 export const loginWithEmailPassword = async (email, password) => {
   if (!email || !password) return;

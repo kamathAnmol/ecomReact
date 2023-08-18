@@ -5,6 +5,7 @@ import AuthPage from "./routes/authentication/authPage.component.jsx";
 import ShopPage from "./routes/shop/shop.component.jsx";
 import CheckOutPage from "./routes/checkout/checkoutpage.component.jsx";
 import Category from "./routes/category/category.component.jsx";
+import PaymentsPage from "./routes/payments/Payments.component.jsx";
 import { useEffect } from "react";
 import {
   authState,
@@ -41,6 +42,7 @@ function App() {
         <Route path="shop" element={<ShopPage />}></Route>
         <Route path="checkout" element={<CheckOutPage />}></Route>
         <Route path="category/:category" element={<Category />}></Route>
+        <Route path="payment" element={<PaymentsPage />}></Route>
       </Routes>
       <Navbar />
     </div>

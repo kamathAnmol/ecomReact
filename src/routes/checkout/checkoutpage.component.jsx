@@ -109,7 +109,7 @@ function CheckOutPage() {
           <FooterText>
             Total : <b>${total}</b>
           </FooterText>
-          <FooterBtn>
+          <FooterBtn to="/payment">
             Checkout
             <CreditCard size={48} strokeWidth={1} />
           </FooterBtn>

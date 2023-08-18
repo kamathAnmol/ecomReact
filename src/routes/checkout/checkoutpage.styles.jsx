@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { devices } from "../../assets/constants";
+import { Link } from "react-router-dom";
 
 export const CheckoutContainer = styled.div`
   width: 80%;
@@ -62,7 +63,7 @@ export const FooterText = styled.p`
   }
 `;
 
-export const FooterBtn = styled.button`
+export const FooterBtn = styled(Link)`
   border: none;
   background: rgb(255, 169, 1);
   height: 10vh;

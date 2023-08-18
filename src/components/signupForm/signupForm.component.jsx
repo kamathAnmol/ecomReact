@@ -19,15 +19,14 @@ function SignUpForm() {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-
     if (password !== confirmPassword) {
       alert("passwords Dont Match");
+      return;
     }
     try {
-      const { user } = await emailPassword(email, password);
+      const { user } = await emailPassword(email, password, displayName);
       await createUserDoc(user, { displayName });
-      alert("registered Successfully please login");
-      // setCurrentUser(user);
+      alert("registered Successfully");
       setFormInput(formFields);
     } catch (error) {
       alert(error.code);
