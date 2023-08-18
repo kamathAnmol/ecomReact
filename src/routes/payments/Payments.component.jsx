@@ -38,14 +38,14 @@ function PaymentsPage() {
       payment_method: {
         card: elements.getElement(CardElement),
         billing_details: {
-          name: currentUser.displayName || "Guest",
+          name: currentUser !== null ? currentUser.displayName : "guest",
         },
       },
     });
     setisPaymentProcessing(false);
     if (paymentResult.error) {
       console.error(paymentResult.error);
-      alert(paymentResult.error);
+      alert(paymentResult.error.message);
     } else {
       if (paymentResult.paymentIntent.status === "succeeded") {
         alert("successful");
