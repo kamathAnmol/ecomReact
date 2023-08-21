@@ -26,7 +26,7 @@ export const Wrapper = styled.div`
 `;
 
 export const CartItemName = styled.p`
-  font-size: 1.3vw;
+  font-size: 1vw;
   width: 100%;
   font-weight: 500;
   overflow: hidden;

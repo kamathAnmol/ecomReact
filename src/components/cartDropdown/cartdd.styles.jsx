@@ -17,7 +17,7 @@ export const CheckoutBtn = styled.button`
   background-color: black;
   color: white;
   height: 5vh;
-  font-size: 1.3vw;
+  font-size: 1vw;
   font-weight: 300;
   transition: 0.3s;
   &:hover {

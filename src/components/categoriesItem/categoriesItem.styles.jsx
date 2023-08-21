@@ -9,7 +9,7 @@ export const CategoryContent = styled.div`
   z-index: 3;
   display: flex;
   flex-direction: column;
-  bottom: -70%;
+  bottom: -60%;
   color: white;
   transition: 0.3s;
   text-transform: capitalize;
