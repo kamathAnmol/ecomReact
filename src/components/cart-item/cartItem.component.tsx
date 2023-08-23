@@ -6,19 +6,24 @@ import {
   InnerWrapper,
   CartItemName,
 } from "./cartItem.styles";
+import { productInterface } from "../../store/products/products.reducer";
 
-function CartItem({ cartItem }) {
+interface cartItemProp{
+  cartItem:productInterface;
+}
+
+function CartItem({ cartItem }:cartItemProp) {
   return (
     <CartItemContainer>
-      <CartItemImg src={cartItem.thumbnail} alt={cartItem.name} />
+      <CartItemImg src={cartItem.thumbnail?.toString()} alt={cartItem.title?.toString()} />
       <Wrapper>
         <CartItemName>{cartItem.title}</CartItemName>
         <InnerWrapper>
           <p>
-            Rs.<b>{cartItem.price}</b>
+            Rs.<b>{cartItem.price?.toString()}</b>
           </p>
           <p>
-            x<b>{cartItem.quantity}</b>
+            x<b>{cartItem.quantity?.toString()}</b>
           </p>
         </InnerWrapper>
       </Wrapper>

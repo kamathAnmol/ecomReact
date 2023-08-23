@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import CartItem from "../cart-item/cartItem.component";
 import {
@@ -11,7 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../../store/cart/cart.selector";
 import { setDropDown } from "../../store/cart/cart.reducer";
-
+import { productInterface } from "../../store/products/products.reducer";
 function CartDropdown() {
   // const { cartItems, setShowDD } = useContext(CartContext);
   const [isMouseEnter, setIsMouseEnter] = useState(false);
@@ -26,8 +25,8 @@ function CartDropdown() {
     >
       <CartItemContainer>
         {cartItems.length > 0 ? (
-          cartItems.map((cartItem) => {
-            return <CartItem cartItem={cartItem} key={cartItem.id}></CartItem>;
+          cartItems.map((cartItem:productInterface) => {
+            return <CartItem cartItem={cartItem} key={cartItem.id?.toString()}></CartItem>;
           })
         ) : (
           <EmptyCartString>No Items in the Cart</EmptyCartString>

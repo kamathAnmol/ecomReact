@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import FormInput from "../inputField/inputField.component";
 import { loginWithEmailPassword } from "../../utils/firebase/firebase";
 import { LoginBtn, LoginPageContainer } from "./loginPage.styles";
@@ -10,18 +10,18 @@ function LoginForm() {
   };
 
   const [forminputs, setForminputs] = useState(defaultForm);
-  const handleChange = (event) => {
+  const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForminputs({ ...forminputs, [name]: value });
   };
   const { email, password } = forminputs;
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await loginWithEmailPassword(email, password);
       setForminputs(defaultForm);
       alert("logged in");
-    } catch (error) {
+    } catch (error:any) {
       alert(error.code);
     }
   };

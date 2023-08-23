@@ -8,18 +8,23 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../../store/cart/cart.selector";
 import { setCartItems } from "../../store/cart/cart.reducer";
+import { productInterface } from "../../store/products/products.reducer";
 
-function ShopItem({ product }) {
+interface productData{
+  product:productInterface
+}
+
+function ShopItem({ product }:productData) {
   const dispatch = useDispatch();
   const { cartItems } = useSelector(selectCart);
 
-  const addToCart = (product) => {
+  const addToCart = (product:productInterface) => {
     const existingCartItem = cartItems.find(
       (cartItem) => cartItem.id === product.id
     );
 
     if (existingCartItem) {
-      const updatedCartItems = cartItems.map((cartItem) =>
+      const updatedCartItems = cartItems.map((cartItem:productInterface) =>
         cartItem.id === product.id
           ? { ...cartItem, quantity: cartItem.quantity + 1 }
           : cartItem
@@ -32,9 +37,9 @@ function ShopItem({ product }) {
   };
 
   return (
-    <ShopItemContainer key={product.id}>
+    <ShopItemContainer key={product.id?.toString()}>
       <ShopImgContainer>
-        <ShopItemImg src={product.thumbnail} alt="" />
+        <ShopItemImg src={product.thumbnail?.toString()} alt="" />
         <ShopItemBtn onClick={() => addToCart(product)}>
           Add to Cart
         </ShopItemBtn>

@@ -1,34 +1,43 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { emailPassword, createUserDoc } from "../../utils/firebase/firebase";
 import FormInput from "../inputField/inputField.component";
 import { SignUpBtn } from "./signupForm.styles";
-const formFields = {
+import { UserCredential, UserInfo } from "firebase/auth";
+
+interface formFieldInterface{
+  displayName:string; 
+  email:string; 
+  password:string; 
+  confirmPassword:string;
+}
+const formFields:formFieldInterface = {
   displayName: "",
   email: "",
   password: "",
   confirmPassword: "",
 };
+
 function SignUpForm() {
-  const [formInput, setFormInput] = useState({ formFields });
-  const { displayName, email, password, confirmPassword } = formInput;
-  const changeHandler = (event) => {
+  const [formInput, setFormInput] = useState<formFieldInterface>(formFields );
+  const { displayName, email, password, confirmPassword }:formFieldInterface = formInput;
+  const changeHandler = (event:React.ChangeEvent<HTMLInputElement>) => {
     const name = event.target.name;
     const value = event.target.value;
     setFormInput({ ...formInput, [name]: value });
   };
-  const submitHandler = async (e) => {
+  const submitHandler = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert("passwords Dont Match");
       return;
     }
     try {
-      const { user } = await emailPassword(email, password, displayName);
+      const response:UserCredential|undefined = await emailPassword(email, password, displayName);
+      const user:UserInfo|undefined = response?.user;
       await createUserDoc(user, { displayName });
       alert("registered Successfully");
       setFormInput(formFields);
-    } catch (error) {
+    } catch (error:any) {
       alert(error.code);
     }
   };

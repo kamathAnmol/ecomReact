@@ -1,21 +1,21 @@
-import Home from "./routes/home/home.component.jsx";
+import Home from "./routes/home/home.component";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./routes/navigation/navbar.component.jsx";
-import AuthPage from "./routes/authentication/authPage.component.jsx";
-import ShopPage from "./routes/shop/shop.component.jsx";
-import CheckOutPage from "./routes/checkout/checkoutpage.component.jsx";
-import Category from "./routes/category/category.component.jsx";
-import PaymentsPage from "./routes/payments/Payments.component.jsx";
+import Navbar from "./routes/navigation/navbar.component";
+import AuthPage from "./routes/authentication/authPage.component";
+import ShopPage from "./routes/shop/shop.component";
+import CheckOutPage from "./routes/checkout/checkoutpage.component";
+import Category from "./routes/category/category.component";
+import PaymentsPage from "./routes/payments/Payments.component";
 import { useEffect } from "react";
 import {
   authState,
   createUserDoc,
   signOutUser,
   getProducts,
-} from "./utils/firebase/firebase.js";
+} from "./utils/firebase/firebase";
 import { useDispatch } from "react-redux";
-import { setCurrentUser } from "./store/user/user.reducer.js";
-import { setProducts } from "./store/products/products.reducer.js";
+import { setCurrentUser } from "./store/user/user.reducer";
+import { setProducts } from "./store/products/products.reducer";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -24,7 +24,7 @@ function App() {
       if (user) {
         createUserDoc(user);
       }
-      dispatch(setCurrentUser(user));
+      dispatch(setCurrentUser(user ? user : null));
     });
     const getProductData = async () => {
       const newProducts = await getProducts();

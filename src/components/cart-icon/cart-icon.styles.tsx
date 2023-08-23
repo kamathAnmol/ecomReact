@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
-import { ReactComponent as CartSvg } from "../../assets/shopping-bag.svg";
 import { devices } from "../../assets/constants";
-
+import { ShoppingCart } from "lucide-react";
 export const CartContainer = styled.div`
   position: relative;
   display: flex;
@@ -11,6 +10,7 @@ export const CartContainer = styled.div`
   width: 35px;
   height: 35px;
   margin: auto 1rem;
+  border-radius:50px;
   ${devices.mobile} {
     width: 15px;
     height: 15px;
@@ -19,11 +19,12 @@ export const CartContainer = styled.div`
     width: 25px;
     height: 25px;
   }
+
 `;
-export const CartSvgContainer = styled(CartSvg)`
+export const CartSvgContainer = styled(ShoppingCart)`
   width: 35px;
   height: 35px;
-  position: absolute;
+
   ${devices.mobile} {
     width: 25px;
     height: 25px;

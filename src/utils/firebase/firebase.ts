@@ -8,6 +8,9 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
+  UserInfo,
+  NextOrObserver,
+  User,
 } from "firebase/auth";
 import {
   doc,
@@ -20,6 +23,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import data from "../../assets/db.json";
+import { productInterface } from "../../store/products/products.reducer";
 const firebaseConfig = {
   apiKey: "AIzaSyCp3thBwYQtdIWIMYSoRbZ45FUVl6FYUUI",
 
@@ -42,18 +46,28 @@ provider.setCustomParameters({
 
 export const auth = getAuth();
 export const popup = () => signInWithPopup(auth, provider);
-export const emailPassword = async (email, password, displayName) => {
+export const emailPassword = async (
+  email: string,
+  password: string,
+  displayName: string
+) => {
   if (!email || !password) return;
   const result = await createUserWithEmailAndPassword(auth, email, password);
   await updateProfile(result.user, { displayName: displayName });
   return result;
 };
-export const loginWithEmailPassword = async (email, password) => {
+export const loginWithEmailPassword = async (
+  email: string,
+  password: string
+) => {
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password);
 };
 export const db = getFirestore();
-export const createUserDoc = async (userAuth, additional) => {
+export const createUserDoc = async (
+  userAuth: UserInfo | any,
+  additional?: {}
+) => {
   const userDocRef = doc(db, "user", userAuth.uid);
   const userSnap = await getDoc(userDocRef);
   if (!userSnap.exists()) {
@@ -73,7 +87,8 @@ export const createUserDoc = async (userAuth, additional) => {
   return userDocRef;
 };
 export const signOutUser = async () => await signOut(auth);
-export const authState = (callback) => onAuthStateChanged(auth, callback);
+export const authState = (callback: (user: User | null) => void) =>
+  onAuthStateChanged(auth, callback);
 
 export const addToDb = async () => {
   const collectionRef = collection(db, "products");
@@ -90,13 +105,20 @@ export const getProducts = async () => {
   const collectionRef = collection(db, "products");
   const q = query(collectionRef);
   const querySnap = await getDocs(q);
-  const productsArray = [];
+  const productsArray: productInterface[] = [];
   querySnap.forEach((doc) => {
     if (doc.exists()) {
       // The `doc.data()` method returns the document data as an object.
       const productData = doc.data();
       // Assuming each product document has a unique identifier, you can also include it in the object.
-      const productObject = { id: doc.id, ...productData };
+      const productObject: productInterface = {
+        id: doc.id,
+        ...productData,
+        price: productData.price,
+        thumbnail: productData.thumbnail,
+        title: productData.title,
+        quantity: 0,
+      };
       productsArray.push(productObject);
     }
   });

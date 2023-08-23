@@ -5,12 +5,11 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import { selectProducts } from "../../store/products/products.selector";
 function Home() {
   const products = useSelector(selectProducts);
-  const catList = [];
+  const catSet = new Set<string|undefined>();
   products.map((product) => {
-    catList.push(product.category);
+    catSet.add(product.category)
     return 0;
   });
-  const catSet = new Set(catList);
   const categories = [...catSet];
   return (
     <CategoryContainer>

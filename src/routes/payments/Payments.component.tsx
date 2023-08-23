@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React  from "react";
 import PayButton from "../../components/payButton/paybutton.component";
 import {
   PaymentHead,
@@ -9,13 +9,7 @@ import {
 } from "./payments.styles";
 import { useSelector } from "react-redux";
 import { selectCart } from "../../store/cart/cart.selector";
-import {
-  CardElement,
-  Elements,
-  PaymentElement,
-  useElements,
-  useStripe,
-} from "@stripe/react-stripe-js";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { selectCurrentUser } from "../../store/user/user.selector";
 
 function PaymentsPage() {
@@ -23,12 +17,9 @@ function PaymentsPage() {
   const stripe = useStripe();
   const elements = useElements();
   const currentUser = useSelector(selectCurrentUser);
-  const [isPaymentProcessing, setisPaymentProcessing] = useState(false);
-  const [options, setOptions] = useState({});
-  const paymentHandler = async (e) => {
+  const paymentHandler = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!stripe || !elements) return;
-    setisPaymentProcessing(true);
     const response = await fetch("/.netlify/functions/create-payment-intent", {
       method: "post",
       headers: {
@@ -41,16 +32,14 @@ function PaymentsPage() {
     const {
       paymentIntent: { client_secret },
     } = response;
-    setOptions({ clientSecret: `{${client_secret}}` });
     const paymentResult = await stripe.confirmCardPayment(client_secret, {
       payment_method: {
-        card: elements.getElement(CardElement),
+        card: elements.getElement(CardElement)!,
         billing_details: {
-          name: currentUser !== null ? currentUser.displayName : "guest",
+          name: currentUser?.displayName ?? "guest",
         },
       },
     });
-    setisPaymentProcessing(false);
     if (paymentResult.error) {
       console.error(paymentResult.error);
       alert(paymentResult.error.message);
@@ -66,7 +55,7 @@ function PaymentsPage() {
       <CardElement />
 
       <Wrapper>
-        <PayButton disabled={isPaymentProcessing}></PayButton>
+        <PayButton ></PayButton>
         <div>
           <TotalText>Total</TotalText>
           <TotalP>{`RS.${total}`}</TotalP>

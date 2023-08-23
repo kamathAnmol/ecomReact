@@ -9,8 +9,11 @@ import {
 } from "./categoriesItem.styles";
 import { Link } from "react-router-dom";
 
-const CategoriesItem = (props) => {
-  const category = props.category;
+interface categoryInterface{
+  category:string|undefined;
+}
+
+const CategoriesItem = ({category}:categoryInterface) => {
   const productList = data.products;
   let img = "";
   productList.map((product) => {

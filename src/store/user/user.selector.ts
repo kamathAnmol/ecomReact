@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
+import { rootInterface } from "../root-reducer";
 
-const userState = (state) => state.user.currentUser;
+const userState = (state: rootInterface) => state.user.currentUser;
 
 export const selectCurrentUser = createSelector(
   [userState],

@@ -1,6 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { productInterface } from "../products/products.reducer";
+import { PayloadAction } from "@reduxjs/toolkit";
+export interface cartInterface {
+  cartItems: productInterface[];
+  count: number;
+  total: number;
+  dropDown: boolean;
+}
 
-export const INITIAL_STATE = {
+export const INITIAL_STATE: cartInterface = {
   cartItems: [],
   count: 0,
   total: 0,
@@ -11,7 +19,7 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState: INITIAL_STATE,
   reducers: {
-    setCartItems(state, action) {
+    setCartItems(state, action: PayloadAction<productInterface[]>) {
       state.cartItems = action.payload;
     },
     setDropDown(state, action) {

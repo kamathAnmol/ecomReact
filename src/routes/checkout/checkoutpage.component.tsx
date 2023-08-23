@@ -1,4 +1,3 @@
-import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ChevronRight, ChevronLeft, Trash2, CreditCard } from "lucide-react";
 import {
@@ -13,16 +12,17 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../../store/cart/cart.selector";
 import { setCartItems } from "../../store/cart/cart.reducer";
+import { productInterface } from "../../store/products/products.reducer";
 
 function CheckOutPage() {
   const dispatch = useDispatch();
   const { cartItems, total } = useSelector(selectCart);
 
-  const removeCartItem = (product) => {
+  const removeCartItem = (product:productInterface) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== product.id);
     dispatch(setCartItems(updatedCartItems));
   };
-  const modifyQuantity = (product, func) => {
+  const modifyQuantity = (product:productInterface, func:string) => {
     const updatedCartItems = cartItems.map((item) => {
       if (item.id === product.id) {
         const newItem = { ...item };
@@ -43,7 +43,7 @@ function CheckOutPage() {
       <CheckoutHead>
         <h1>Checkout</h1>
         <p>
-          Total : <b> Rs.{total}</b>
+          Total : <b> Rs.{total.toString()}</b>
         </p>
       </CheckoutHead>
       <table className="table" style={{ marginBottom: "10rem" }}>
@@ -63,9 +63,9 @@ function CheckOutPage() {
         <tbody>
           {cartItems.map((item) => {
             return (
-              <TableRow key={item.id}>
+              <TableRow key={item.id?.toString()}>
                 <th scope="row">
-                  <CheckoutImg src={item.thumbnail} alt="" />
+                  <CheckoutImg src={item.thumbnail?.toString()} alt="" />
                 </th>
                 <td>
                   <b>{item.title}</b>
@@ -107,7 +107,7 @@ function CheckOutPage() {
       {cartItems.length > 0 && (
         <CheckoutFooter>
           <FooterText>
-            Total : <b>Rs.{total}</b>
+            Total : <b>Rs.{total.toString()}</b>
           </FooterText>
           <FooterBtn to="/payment">
             Checkout
