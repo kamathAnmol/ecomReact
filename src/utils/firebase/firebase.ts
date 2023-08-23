@@ -9,7 +9,6 @@ import {
   onAuthStateChanged,
   updateProfile,
   UserInfo,
-  NextOrObserver,
   User,
 } from "firebase/auth";
 import {
